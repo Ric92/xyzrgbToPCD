@@ -28,10 +28,20 @@ int main(int _argc, char const *_argv[])
     {
         std::istringstream iss(line);
         float a, x, y, z;
-        uint8_t r, g, b;
+        float r, g, b;
+        float factor = 0;
         if (!(iss >> x >> y >> z >> a >> r >> g >> b))
             break;
-
+        if (r > g && r > b){
+            g = g-factor;
+            b = b-factor;
+        }else if(g > b && g > r){
+            r = r-factor;
+            b = b-factor;
+        }else{
+            r = r-factor;
+            g = g-factor;
+        }
         pcl::PointXYZRGB point(r, g, b);
         point.x = x;
         point.y = y;
